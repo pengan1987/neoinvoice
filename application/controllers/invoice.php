@@ -22,9 +22,20 @@ class Invoice extends CI_Controller {
         $this->load->library('form_validation');
 
         $this->invoice_model->insert();
-        $data['paddedNum'] = sprintf("%04d", $this->invoice_model->get_last_cid());
+        $data['paddedNum'] = sprintf("%04d", $this->invoice_model->get_last_cid() + 1);
         $data['lastCid'] = $this->invoice_model->get_last_cid();
         $this->load->view('invoice/form', $data);
+    }
+
+    public function history() {
+        $invoiceArray = array();
+        $cidObjArray = $this->invoice_model->get_all_cid();
+        foreach ($cidObjArray as $cidObj){
+            $cid= $cidObj->cid;
+            $invoiceArray[$cid] = $this->invoice_model->get_by_cid($cid);
+        }
+        $data['invoiceArray'] = $invoiceArray;
+        $this->load->view('invoice/history', $data);
     }
 
     public function pdf($cid) {
@@ -43,7 +54,7 @@ class Invoice extends CI_Controller {
             $data['paddedNum'] = sprintf("%08d", $row['cid']);
 
             $this->load->library('html2pdf');
-            //  $this->load->view('invoice/pdf', $data);
+         //   $this->load->view('invoice/pdf', $data);
 
             $this->html2pdf->folder('..');
             $this->html2pdf->html($this->load->view('invoice/pdf', $data, true));

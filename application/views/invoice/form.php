@@ -1,5 +1,7 @@
 <?php
 $this->load->helper('form');
+$this->load->helper('url');
+$this->load->helper('html');
 ?>
 
 <html>
@@ -43,7 +45,7 @@ $this->load->helper('form');
         ?>
         <table id="dataTable">
             <tr class="title">
-                <td><a href="outputall.php" target="_blank">History</a></td>
+                <td><?= anchor('invoice/history/','History')?></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -51,11 +53,13 @@ $this->load->helper('form');
 
             <tr>
                 <td><?php
-                    if (is_null($lastCid)) {
+                    if (!isset($lastCid)) {
                         echo "New Invoice";
                     } else {
                         echo "Invoice was added.";
                         echo "<br />Click to Download: $lastCid";
+                        $siteUrl =  site_url();
+                        echo anchor('invoice/pdf/'.$lastCid, "<br />Click to Download: $lastCid");
                     }
                     ?>
                 </td>

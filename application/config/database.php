@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'zpazpa';
+$db['default']['username'] = 'gcom';
+$db['default']['password'] = 'hjNANBL7fwtMxqmE';
 $db['default']['database'] = 'gcom';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

@@ -31,10 +31,15 @@ class invoice_model extends CI_Model {
     }
 
     function get_last_cid() {
-        $query = $this->db->query("SELECT cid FROM invoice ORDER BY id DESC limit 1;");
+        $this->db->select("cid");
+        $this->db->from("invoice");
+        $this->db->order_by('id', 'desc');
+        $this->db->limit(1);
+
+        $query = $this->db->get();
         $row = $query->row_array();
         $id = $row['cid'];
-        return (is_null($id) ? 1 : $id + 1);
+        return (is_null($id) ? 1 : $id);
     }
 
     function get_all_entries() {
@@ -46,6 +51,11 @@ class invoice_model extends CI_Model {
         $queryCommand = "SELECT * FROM invoice WHERE cid = ?";
         $query = $this->db->query($queryCommand, array($cid));
         return $query->result_array();
+    }
+
+    function get_all_cid() {
+        $query = $this->db->query("SELECT DISTINCT cid FROM invoice ORDER BY id;");
+        return $query->result();
     }
 
     function insert() {
