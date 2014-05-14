@@ -57,8 +57,7 @@ $this->load->helper('html');
                         echo "New Invoice";
                     } else {
                         echo "Invoice was added.";
-                        echo "<br />Click to Download: $lastCid";
-                        $siteUrl =  site_url();
+                        
                         echo anchor('invoice/pdf/'.$lastCid, "<br />Click to Download: $lastCid");
                     }
                     ?>

@@ -24,7 +24,7 @@ class invoice_model extends CI_Model {
     var $payment = '';
     var $qty = '';
     var $address = '';
-    var $date = '';
+    
 
     function __construct() {
         parent::__construct();
@@ -63,13 +63,13 @@ class invoice_model extends CI_Model {
         $this->phone = $this->input->post('phone');
         $this->payment = $this->input->post('payment');
         $this->address = $this->input->post('address');
-        $this->date = $this->input->post('date');
-        $this->cid = $this->get_last_cid();
+        
+        $this->cid = $this->get_last_cid()+1;
 
         $array_itemnumb = $this->input->post('itemnumb');
         $array_description = $this->input->post('description');
         $array_price = $this->input->post('price');
-        $array_cid = $this->input->post('cid');
+        
         $array_qty = $this->input->post('qty');
 
 
